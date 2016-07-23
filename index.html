@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>icloud</title>
+	<link rel="stylesheet" href="css/icloud.css">
+	<link rel="stylesheet" href="css/public.css">
+	<script src="js/angular.min.js"></script>
+	<script src="js/index.js"></script>
+</head>
+<body>
+<div class="body" ng-controller="todo">
+
+	<!--左边部分*********************************************-->
+	<div class="left">
+		<div class="top">
+			<span class="logo">iCloud</span>
+			<span class="add" ng-click="add()">+</span>
+		</div>
+		<div class="list">
+			<ul class="ul">
+				<li class="liebiao" ng-repeat="v in todo" ng-click="select($index)">
+					<span class="yuan" ng-style="{background:v.color}"></span>
+					<span class="con">{{v.title}}</span>
+				</li>
+			</ul>
+		</div>
+	</div>	
+
+
+	<!--右边部分*********************************************-->
+
+	<div class="right">
+		<div class="tops">
+			<div class="input"><input type="text" placeholder="搜索所有提醒"></div>
+		</div>
+		<div class="lists">
+			<div class="list_top" ng-style="{color:todo[index].color}">
+				<span class="list_top_one">{{todo[index].title}}</span>
+				<span class="list_top_tow" ng-click="fg=!fg">选项</span>
+				<div class="xxk" ng-if='fg'>
+					<div class="nxxk">
+						<input type="text" ng-model="todo[index].list.title">
+						<p>列表颜色</p>
+						<ul>
+							<li ng-repert="v in todo" ng-style=""></li>
+						</ul>
+						<div class="db">
+							<div class="del">删除</div>
+							<div class="qx">取消</div>
+							<div class="finish">完成</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="list_wancheng">
+				<div class="sj" ng-click="{true:'flag',false:'!flag'}[flag]"></div>
+				<span class="wancheng">已完成：{{kk}}项</span>
+				<ul>
+					<li ng-repeat="v in todo[index].list | filter:doing">
+						<span ng-style="{'border-color':todo[index].color,'background-color':todo[index].color}" ng-click="change(v,false)"></span>
+						{{v.content}}
+					</li>
+				</ul>
+				
+			</div>
+			<div class="list_news list_wancheng">
+				<ul>
+					<li ng-repeat="v in todo[index].list | filter:done">
+						<span ng-style="{'border-color':todo[index].color}" ng-click="change(v,true)"></span>
+						{{v.content}}
+					</li>
+					<span ng-click="addlist()">新项目……</span>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+</div>
+</body>
+</html>
